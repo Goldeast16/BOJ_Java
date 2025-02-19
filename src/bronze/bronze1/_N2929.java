@@ -2,7 +2,7 @@ package bronze.bronze1;
 // 왜 안됨??
 import java.util.Scanner;
 
-public class N2929 {
+public class _N2929 {
 
     public static void main(String[] args) {
 
