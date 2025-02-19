@@ -1,5 +1,5 @@
 package bronze.bronze1;
-// 못품
+// 왜 안됨??
 import java.util.Scanner;
 
 public class N2929 {
@@ -8,52 +8,38 @@ public class N2929 {
 
         Scanner scanner = new Scanner(System.in);
         String code = scanner.nextLine();
-        int needNOP = 0;
-        int lowerCount = 0;
+        int count = 0;
+        int processorCount = 0;
 
         for (int i = 0; i < code.length(); i++) {
-            char ch = code.charAt(i);
-
-            if (Character.isUpperCase(ch)) {
-                if (i != 0) { // 첫 번째 명령어는 검사하지 않음
-                    if (lowerCount < 3) {
-                        needNOP += (3 - lowerCount);
-                        lowerCount = 0;
-                    } else {
-                        lowerCount -= 3; // 남은 소문자는 다음 명령어의 매개변수로 이어짐
-                    }
+            char c = code.charAt(i);
+            System.out.println((i+1)+"번째 글자: " + c);
+            if (i == 0 && Character.isUpperCase(c)) {
+                // System.out.println("첫번째 글자임");
+                count++;
+            } else if (Character.isUpperCase(c)) {
+                // System.out.println("다시 명령어");
+                if (count % 4 == 0) {
+                    // System.out.println("지금까지 파라미터 3개");
+                    count = 0;
+                } else {
+                    // System.out.println("지금까지 파라미터 " + (4-count) + "개");
+                    processorCount += 4 - count;
+                    count = 0;
                 }
-            } else if (Character.isLowerCase(ch)) {
-                lowerCount++;
+                count++;
+            } else {
+                // System.out.println("파라미터");
+                count++;
             }
+            processorCount++;
+
+            // System.out.println("count = " + count);
+            // System.out.println("processorCount = " + processorCount);
+            // System.out.println("NOP의 수: " + (processorCount - (i+1)));
         }
-        System.out.println(needNOP);
 
+        System.out.println(processorCount - code.length());
 
-        /*
-        Scanner scanner = new Scanner(System.in);
-        String code = scanner.nextLine();
-        int needNOP = 0;
-        int lowerCount = 0;
-
-        for (int i = 0; i < code.length(); i++) {
-            char ch = code.charAt(i);
-
-            if (i != 0 && Character.isUpperCase(ch)) {
-                if (lowerCount < 3) {
-                    needNOP += (3-lowerCount);
-                    lowerCount = 0;
-                } else if (lowerCount == 3) {
-                    lowerCount = 0;
-                } else if (lowerCount == 4) {
-                    needNOP += 3;
-                    lowerCount = 0;
-                }
-            } else if (Character.isLowerCase(ch)) {
-                lowerCount++;
-            }
-        }
-        System.out.println(needNOP);
-         */
     }
 }
