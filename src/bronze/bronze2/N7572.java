@@ -8,14 +8,11 @@ public class N7572 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int year= Integer.parseInt(br.readLine().trim());
-        int gan = 0;
-        int easy = 'G';
-        System.out.println((int)easy);
-        System.out.println((int)'A');
-        System.out.println((int)'L');
+        int gan = 9;
+        int easy = 'F';
 
         if (year >= 2013) {
-            for (int i = 2013; i <= year; i++) {
+            for (int i = 2013; i < year; i++) {
                 if (gan != 9) {
                     gan++;
                 } else {
@@ -41,11 +38,12 @@ public class N7572 {
                 } else {
                     easy = 'L';
                 }
-                if (now == year); {
+                if (now == year) {
                     break;
                 }
             }
         }
         System.out.print((char)easy);
+        System.out.println(gan);
     }
 }
