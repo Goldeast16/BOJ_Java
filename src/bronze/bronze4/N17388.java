@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class N17388 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] input = br.readLine().split("");
+        String[] input = br.readLine().split(" ");
         int S = Integer.parseInt(input[0]);
         int K = Integer.parseInt(input[1]);
         int H = Integer.parseInt(input[2]);
