@@ -19,5 +19,6 @@ public class N11005 {
         }
         String answer = result.reverse().toString();
         System.out.println(answer);
+        
     }
 }
