@@ -28,6 +28,7 @@ public class N1003 {
     }
 }
 
+
 /*
 public class N1003 {
     public static void main(String[] args) throws IOException {
