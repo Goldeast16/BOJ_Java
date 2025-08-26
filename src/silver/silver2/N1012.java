@@ -49,7 +49,7 @@ public class N1012 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder out = new StringBuilder();
 
-        int T = Integer.parseInt(br.readLine().trim());
+        int T = Integer.parseInt(br.readLine());
         while (T-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             M = Integer.parseInt(st.nextToken());
