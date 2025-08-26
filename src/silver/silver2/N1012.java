@@ -1,82 +1,73 @@
 package silver.silver2;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class N1012 {
 
-    public static int countWarm(int[][] farm, int[][] visited, int K) {
-        int count = 0;
+    static int N, M;
+    static int[][] farm;
+    static boolean[][] visited;
+    static final int[] DY = {-1, 1, 0, 0};
+    static final int[] DX = {0, 0, -1, 1};
 
-        for  (int i = 0; i < farm.length; i++) {
-            for (int j = 0; j < farm[0].length; j++) {
-                if (farm[i][j] == 1 && visited[i][j] == 0) {
-                    K -= bfs(farm, visited, i, j);
+    static int countWarm() {
+        int count = 0;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < M; x++) {
+                if (farm[y][x] == 1 && !visited[y][x]) {
+                    bfs(y, x);
                     count++;
                 }
             }
         }
-
         return count;
     }
 
-    public static int bfs (int[][] farm, int[][] visited, int i, int j) {
-        int count = 0;
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[] {i, j});
-        visited[i][j] = 1;
-        count++;
+    static void bfs(int sy, int sx) {
+        ArrayDeque<int[]> q = new ArrayDeque<>();
+        q.offer(new int[]{sy, sx});
+        visited[sy][sx] = true;
 
-        while (!queue.isEmpty()) {
-            int[] cur = queue.poll();
-            int x = cur[0];
-            int y = cur[1];
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int y = cur[0], x = cur[1];
 
-            if (x > 0 && farm[x - 1][y] == 1 && visited[x - 1][y] == 0) {
-                visited[x - 1][y] = 1;
-                queue.add(new int[] {x - 1, y});
-                count++;
-            }
-            if (x < farm.length - 1 && farm[x + 1][y] == 1 && visited[x + 1][y] == 0) {
-                visited[x + 1][y] = 1;
-                queue.add(new int[] {x + 1, y});
-                count++;
-            }
-            if (y > 0 && farm[x][y - 1] == 1 && visited[x][y - 1] == 0) {
-                visited[x][y - 1] = 1;
-                queue.add(new int[] {x, y - 1});
-                count++;
-            }
-            if (y < farm[0].length - 1 && farm[x][y + 1] == 1 && visited[x][y + 1] == 0) {
-                visited[x][y + 1] = 1;
-                queue.add(new int[] {x, y + 1});
-                count++;
+            for (int d = 0; d < 4; d++) {
+                int ny = y + DY[d];
+                int nx = x + DX[d];
+                if (ny < 0 || ny >= N || nx < 0 || nx >= M) continue;
+                if (farm[ny][nx] == 1 && !visited[ny][nx]) {
+                    visited[ny][nx] = true;
+                    q.offer(new int[]{ny, nx});
+                }
             }
         }
-
-        return count;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder out = new StringBuilder();
 
-        int T = Integer.parseInt(br.readLine());
+        int T = Integer.parseInt(br.readLine().trim());
+        while (T-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            M = Integer.parseInt(st.nextToken());
+            N = Integer.parseInt(st.nextToken());
+            int K = Integer.parseInt(st.nextToken());
 
-        while(T--> 0) {
-            String[] input = br.readLine().split(" ");
-            int M = Integer.parseInt(input[0]);
-            int N = Integer.parseInt(input[1]);
-            int K = Integer.parseInt(input[2]);
-            int[][] farm = new int[M][N];
-            int[][] visited = new int[M][N];
+            farm = new int[N][M];
+            visited = new boolean[N][M];
 
-            for (int i = 1; i <= K; i++) {
-                input = br.readLine().split(" ");
-                farm[Integer.parseInt(input[0])][Integer.parseInt(input[1])] = 1;
+            for (int i = 0; i < K; i++) {
+                st = new StringTokenizer(br.readLine());
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+                farm[y][x] = 1;
             }
 
-            System.out.println(countWarm(farm, visited, K));
+            out.append(countWarm()).append('\n');
         }
+        System.out.print(out);
     }
 }
