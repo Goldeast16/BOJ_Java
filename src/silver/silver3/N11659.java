@@ -31,5 +31,6 @@ public class N11659 {
             bw.write(sum + "\n");
         }
         bw.flush();
+        br.close();
     }
 }

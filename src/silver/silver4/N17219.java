@@ -22,5 +22,6 @@ public class N17219 {
             bw.write(IDnPW.get(input[0]) + "\n");
         }
         bw.flush();
+        br.close();
     }
 }

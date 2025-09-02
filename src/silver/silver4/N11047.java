@@ -28,5 +28,6 @@ public class N11047 {
 
         bw.write(String.valueOf(count));
         bw.flush();
+        br.close();
     }
 }

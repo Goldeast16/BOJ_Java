@@ -19,5 +19,6 @@ public class N11727 {
 
         bw.write(dp[N] + "\n");
         bw.flush();
+        br.close();
     }
 }
